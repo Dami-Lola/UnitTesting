@@ -6,22 +6,25 @@
 // tree, read text, and verify that the values of widget properties are correct.
 
 import 'package:flutter/material.dart';
+import 'package:flutter_app/homepage.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_app/main.dart';
+import 'package:mockito/mockito.dart';
+
+class MockNavigatorObserver extends Mock implements NavigatorObserver {}
 
 void main() {
 
-  testWidgets("Flutter textField Test",  (WidgetTester tester) async {
-    await tester.pumpWidget(MyApp());
-    var userName = find.byType(TextField);
-    expect(userName, findsWidgets);
-    await tester.enterText(userName, 'LolaVola');
-    expect(find.text('LolaVola'), findsOneWidget);
-    print('LolaVola');
-  });
+  testWidgets("Change Text Button Test", (WidgetTester tester) async {
 
-  testWidgets("Elevated Button Test", (WidgetTester tester) async {
-    await tester.pumpWidget(MyApp());
+    final randText = find.byWidget(Text('We are here for the win'));
+
+    final registerBtn = find.byKey(ValueKey('ChangeText'));
+
+    await tester.pumpWidget(MaterialApp(home: HomePage()));
+    await tester.tap(registerBtn);
+
+    expect(find.text('We are here for the win'), findsOneWidget);
   });
 
 }

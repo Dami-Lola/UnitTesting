@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/homepage.dart';
+import 'package:flutter_app/routes.dart';
 
 void main() {
   runApp(MyApp());
@@ -14,6 +15,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
+      routes: Routes.routes(),
       home: LoginPage(),
       debugShowCheckedModeBanner: false,
     );
@@ -117,6 +119,7 @@ class _LoginPageState extends State<LoginPage> {
                 width: 200.00,
                 height: 50.00,
                 child: ElevatedButton(
+                  key: Key('registerButton'),
                   child: Text(
                     'Register',
                     style: TextStyle(fontSize: 20.0, color: Colors.white),
@@ -125,8 +128,9 @@ class _LoginPageState extends State<LoginPage> {
                       ElevatedButton.styleFrom(primary: Colors.lightBlue[200]),
                   onPressed: () {
                     if (_formKey.currentState.validate()) {
-                      Navigator.of(context).push(
-                          MaterialPageRoute(builder: (context) => HomePage()));
+                      Navigator.of(context).pushNamed(Routes.ANOTHER_SCREEN_ROUTE,
+                          arguments: 'You got a package, please collect.'
+                      );
                     } else {
                       print('Don\'t be silly');
                     }
